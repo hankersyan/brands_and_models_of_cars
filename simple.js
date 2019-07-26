@@ -19,13 +19,15 @@ for (let alphabet in json.brand) {
             let child = brand.child[c];
             if (child.hasOwnProperty('child')) {
                 for (let d = 0; d < child.child.length; d++) {
-                    a[brand.name].push(child.child[d].name);
+                    if (!a[brand.name].includes(child.child[d].name)) {
+                        a[brand.name].push(child.child[d].name);
+                    }
                 }
             } else {
                 a[brand.name].push(child.name);
             }
         }
-        models[brand.name] = a[brand.name];
+        models[brand.name] = a[brand.name].sort();
     }
     simple[alphabet] = a;
     brands[alphabet] = aa;
